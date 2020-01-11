@@ -5,8 +5,16 @@ URL = 'https://www.amazon.com/dp/B06XPJML5D/?coliid=IWI4KMIW96G43&colid=3R9LWA1W
 
 headers = {"User-Agent": 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'}
 
+
+def check_price():
 page = requests.get(URL, headers=headers)
 
-soup = BeautifulSoup(page.content, 'html.parser')
+soup_clean = BeautifulSoup(page.content, 'html.parser')
+soup=BeautifulSoup(soup_clean.prettify(), 'html.parser')
 
-print(soup.prettify())
+title = soup.find(id="ebooksProductTitle").get_text()
+price = soup.find(class_="a-size-base a-color-price a-color-price").get_text().strip()
+converted_price = float(price[1:])
+
+print(title.strip())
+print(converted_price)
