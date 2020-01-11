@@ -7,14 +7,14 @@ headers = {"User-Agent": 'Mozilla/5.0 (X11; Fedora; Linux x86_64) AppleWebKit/53
 
 
 def check_price():
-page = requests.get(URL, headers=headers)
+    page = requests.get(URL, headers=headers)
 
-soup_clean = BeautifulSoup(page.content, 'html.parser')
-soup=BeautifulSoup(soup_clean.prettify(), 'html.parser')
+    soup_clean = BeautifulSoup(page.content, 'html.parser')
+    soup=BeautifulSoup(soup_clean.prettify(), 'html.parser')
 
-title = soup.find(id="ebooksProductTitle").get_text()
-price = soup.find(class_="a-size-base a-color-price a-color-price").get_text().strip()
-converted_price = float(price[1:])
+    title = soup.find(id="ebooksProductTitle").get_text()
+    price = soup.find(class_="a-size-base a-color-price a-color-price").get_text().strip()
+    converted_price = float(price[1:])
 
-print(title.strip())
-print(converted_price)
+    print(title.strip())
+    print(converted_price)
